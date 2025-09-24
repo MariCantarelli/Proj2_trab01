@@ -1,9 +1,6 @@
 #include <stdlib.h>
 
-void encontrar(int n,int m, char mapa[][]){
-  
-}
-
+void encontrar(int lin, int col, int n, char mapa[][]);
 
 int main(){
   int n;
@@ -24,23 +21,22 @@ int main(){
   for (int i = 0; i < n; i++) {
     scanf("%s", matrix[i]);
   }
-  
+
   int lin, col;
   printf("Linha e coluna inicial: ");
   scanf("%d  %d", &lin, &col);
   //Fim da leitura da matrix
 
-
-
-
-
-
-
+  encontrar(lin, col, n, matrix);
 
 
   for (int i = 0; i < n; i++) {
         free(matrix[i]);
     }
   free(matrix);
+
+}
+
+void encontrar(int lin, int col, int n, char mapa[][]){
 
 }
