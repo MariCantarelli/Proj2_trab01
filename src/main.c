@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-void encontrar(int lin, int col, int n, char mapa[][]);
+void encontrar(int s_lin, int s_col, int lin, int col, char mapa[][], int visitado[][]);
 
 int main(){
   int n;
@@ -11,25 +11,32 @@ int main(){
 
   char **matrix = (char **)malloc(n * sizeof(char *));
   if(matrix == NULL) return 1;
-
   for(int i = 0; i < n; i++){
     matrix[i] = (char *)malloc(n * sizeof(char)); 
     if(matrix[i] == NULL) return 1;
   }
+
+  int **visitado = (int **)malloc(n * sizeof(int *));
+  if(visitado == NULL) return 1;
+  for(int i = 0; i < n; i++){
+    visitado[i] = (int *)malloc(n * sizeof(int)); 
+    if(visitado[i] == NULL) return 1;
+  }
+
 
   printf("Digite %d linhas de %d caracteres:\n", n, n);
   for (int i = 0; i < n; i++) {
     scanf("%s", matrix[i]);
   }
 
-  int lin, col;
+  int startLin, startCol;
   printf("Linha e coluna inicial: ");
-  scanf("%d  %d", &lin, &col);
+  scanf("%d  %d", &startLin, &startCol);
   //Fim da leitura da matrix
+  //Uso da funcao
+  encontrar(startLin, startCol, 0, 0, matrix);
 
-  encontrar(lin, col, n, matrix);
-
-
+  //Liberando matrix
   for (int i = 0; i < n; i++) {
         free(matrix[i]);
     }
@@ -37,6 +44,7 @@ int main(){
 
 }
 
-void encontrar(int lin, int col, int n, char mapa[][]){
+void encontrar(int s_lin, int s_col, int lin, int col, char mapa[][], int visitado[][]){
+
 
 }
