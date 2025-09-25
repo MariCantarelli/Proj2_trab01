@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int encontrar(int lin, int col, char **mapa, int **visitado, int n);
+#define MAX 10
+
+int encontrar(int lin, int col, char mapa[MAX][MAX], int visitado[MAX][MAX], int n, int m);
 
 int main(){
   int n;
@@ -35,7 +37,7 @@ int main(){
   scanf("%d  %d", &startLin, &startCol);
   //Fim da leitura da matrix
   //Uso da funcao
-  int achou = encontrar(startLin, startCol, matrix, visitado, n);
+  int achou = encontrar(startLin, startCol, matrix, visitado, n, m);
 
   //se achou printa que achou, se nao, printa msg de erro
   if (achou == 1){
@@ -55,9 +57,9 @@ int main(){
 
 }
 
-int encontrar(int lin, int col, char **mapa, int **visitado, int n){
+int encontrar(int lin, int col, char mapa[MAX][MAX], int visitado[MAX][MAX], int n, int m){
   //retorna 0 se estiver fora da matriz!
-  if(lin < 0 || col < 0 || lin >= n || col >= n) return 0;
+  if(lin < 0 || col < 0 || lin >= n || col >= m) return 0;
 
   //se ja visitou, retorna 0
   if(visitado[lin][col])return 0;
@@ -71,18 +73,16 @@ int encontrar(int lin, int col, char **mapa, int **visitado, int n){
 
   //quando for H so pode ir pra esquerda ou direita
   if (mapa[lin][col] == 'H') { 
-        if (encontrar( lin, col - 1, mapa, visitado, n)) return 1;
-        if (encontrar(lin, col + 1, mapa, visitado, n)) return 1;
+        if (encontrar( lin, col - 1, mapa, visitado, n, m)) return 1;
+        if (encontrar(lin, col + 1, mapa, visitado, n, m)) return 1;
     }
-    if (mapa[lin][col] == 'V') {
-        if (encontrar(lin - 1, col, mapa, visitado, n)) return 1;
-        if (encontrar(lin + 1, col, mapa, visitado, n)) return 1;
-    }
- 
-  //quando for V so pode ir pra cima ou pra baixo
+    //quando for V so pode ir pra cima ou pra baixo
     //checa a celula visinha, bloqueia a lin de ir pra cima ou baixo quando for h
 
-
-  
+    if (mapa[lin][col] == 'V') {
+        if (encontrar(lin - 1, col, mapa, visitado, n, m)) return 1;
+        if (encontrar(lin + 1, col, mapa, visitado, n, m)) return 1;
+    }
+ 
   return 0;
 }
