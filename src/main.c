@@ -44,7 +44,33 @@ int main(){
 
 }
 
-void encontrar(int s_lin, int s_col, int lin, int col, char mapa[][], int visitado[][]){
+void encontrar(int s_lin, int s_col, int lin, int col, char mapa[][], int visitado[][], int n){
+  //retorna 0 se estiver fora da matriz!
+  if(lin < 0 || col < 0 || lin <= n || col <= n) return 0;
 
+  //se ja visitou, retorna 0
+  if(visitado[lin][col])return 0;
 
+  if( mapa[lin][col] == '*') {
+    printf("Chave foi encontrada no Edifício Joáo Calvino");
+    return 1;
+  }
+  //mrca como visitado
+  visitado[lin][col] = 1;
+
+  //quando for H so pode ir pra esquerda ou direita
+  if(mapa[lin][col] == 'H'){ 
+    if(encontrar(s_lin, s_col, lin, col - 1, mapa, visitado, n)) return 1;
+    if(encontrar(s_lin, s_col, lin, col + 1, mapa, visitado, n)) return 1;
+  }
+
+  //quando for V so pode ir pra cima ou pra baixo
+  if(mapa[lin][col] == 'V'){
+    if(encontrar(s_lin, s_col, lin - 1, col, mapa, visitado, n)) return 1;
+    if(encontrar(s_lin, s_col, lin + 1, col, mapa, visitado, n)) return 1;
+  }
+
+  //fez tds os casos e nn achou 
+  printf("Nao conseguimos encontrar a chave no Edificio Joào Calvino");
+  return 0;
 }
