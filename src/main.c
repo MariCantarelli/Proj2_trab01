@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 int encontrar(int s_lin, int s_col, int lin, int col, char **mapa, int **visitado, int n);
 
@@ -34,12 +35,17 @@ int main(){
   scanf("%d  %d", &startLin, &startCol);
   //Fim da leitura da matrix
   //Uso da funcao
-  encontrar(startLin, startCol, 0, 0, matrix, n);
+  int achou = encontrar(startLin, startCol, startLin, startCol, matrix, visitado, n);
 
+  //se achou printa que achou, se nao, printa msg de erro
+  if (achou == 1){
+    printf("Chave foi encontrada no Edifício Joáo Calvino");
+  }
+  else{
+    printf("Nao conseguimos encontrar a chave no Edificio Joao Calvino\n");
+  }
   //se nn achar printa msg de erro
-  if(!encontrar(startLin, startCol, startLin, startCol, matrix, visitado, n)){
-        printf("Nao conseguimos encontrar a chave no Edificio Joao Calvino\n");
-    }
+
 
   //Liberando matrix
   for (int i = 0; i < n; i++) {
@@ -57,7 +63,6 @@ int encontrar(int s_lin, int s_col, int lin, int col, char **mapa, int **visitad
   if(visitado[lin][col])return 0;
 
   if(mapa[lin][col] == '*') {
-    printf("Chave foi encontrada no Edifício Joáo Calvino");
     return 1;
   }
   //mrca como visitado
