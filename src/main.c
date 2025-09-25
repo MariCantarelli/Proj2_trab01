@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-int encontrar(int s_lin, int s_col, int lin, int col, char mapa[][], int visitado[][]);
+int encontrar(int s_lin, int s_col, int lin, int col, char **mapa, int **visitado, int n);
 
 int main(){
   int n;
@@ -36,6 +36,11 @@ int main(){
   //Uso da funcao
   encontrar(startLin, startCol, 0, 0, matrix, n);
 
+  //se nn achar printa msg de erro
+  if(!encontrar(startLin, startCol, startLin, startCol, matrix, visitado, n)){
+        printf("Nao conseguimos encontrar a chave no Edificio Joao Calvino\n");
+    }
+
   //Liberando matrix
   for (int i = 0; i < n; i++) {
         free(matrix[i]);
@@ -44,7 +49,7 @@ int main(){
 
 }
 
-int encontrar(int s_lin, int s_col, int lin, int col, char mapa[][], int visitado[][], int n){
+int encontrar(int s_lin, int s_col, int lin, int col, char **mapa, int **visitado, int n){
   //retorna 0 se estiver fora da matriz!
   if(lin < 0 || col < 0 || lin >= n || col >= n) return 0;
 
@@ -69,8 +74,5 @@ int encontrar(int s_lin, int s_col, int lin, int col, char mapa[][], int visitad
     if(encontrar(s_lin, s_col, lin - 1, col, mapa, visitado, n)) return 1;
     if(encontrar(s_lin, s_col, lin + 1, col, mapa, visitado, n)) return 1;
   }
-
-  //fez tds os casos e nn achou 
-  printf("Nao conseguimos encontrar a chave no Edificio Joào Calvino");
   return 0;
 }
