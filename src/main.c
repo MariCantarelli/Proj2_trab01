@@ -1,88 +1,58 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
-#define MAX 10
+#define MAX 1000  // aumenta se quiser suportar mapas grandes
 
 int encontrar(int lin, int col, char mapa[MAX][MAX], int visitado[MAX][MAX], int n, int m);
 
 int main(){
-  int n;
-  //Inicio leitura e malloc
-  printf("Insira o tamanho da matriz [N]x[N] : ");
-  scanf("%d", &n);
-  printf("\n");
+    int n;
+    scanf("%d", &n); // número de andares (linhas)
 
-  char **matrix = (char **)malloc(n * sizeof(char *));
-  if(matrix == NULL) return 1;
-  for(int i = 0; i < n; i++){
-    matrix[i] = (char *)malloc(n * sizeof(char)); 
-    if(matrix[i] == NULL) return 1;
-  }
+    char mapa[MAX][MAX];
+    int visitado[MAX][MAX] = {0};
 
-  int **visitado = (int **)malloc(n * sizeof(int *));
-  if(visitado == NULL) return 1;
-  for(int i = 0; i < n; i++){
-    visitado[i] = (int *)malloc(n * sizeof(int)); 
-    if(visitado[i] == NULL) return 1;
-  }
+    char buffer[MAX];
+    scanf("%s", buffer);
+    int m = strlen(buffer);
+    strcpy(mapa[0], buffer);
 
-
-  printf("Digite %d linhas de %d caracteres:\n", n, n);
-  for (int i = 0; i < n; i++) {
-    scanf("%s", matrix[i]);
-  }
-
-  int startLin, startCol;
-  printf("Linha e coluna inicial: ");
-  scanf("%d  %d", &startLin, &startCol);
-  //Fim da leitura da matrix
-  //Uso da funcao
-  int achou = encontrar(startLin, startCol, matrix, visitado, n, m);
-
-  //se achou printa que achou, se nao, printa msg de erro
-  if (achou == 1){
-    printf("Chave foi encontrada no Edifício Joáo Calvino");
-  }
-  else{
-    printf("Nao conseguimos encontrar a chave no Edificio Joao Calvino\n");
-  }
-  //se nn achar printa msg de erro
-
-
-  //Liberando matrix
-  for (int i = 0; i < n; i++) {
-        free(matrix[i]);
+    for (int i = 1; i < n; i++) { // começa do 1
+    scanf("%s", mapa[i]);
     }
-  free(matrix);
 
+
+    int startLin, startCol;
+    scanf("%d %d", &startLin, &startCol);
+
+    int achou = encontrar(startLin, startCol, mapa, visitado, n, m);
+
+    if (achou == 1){
+        printf("Chave encontrada no Edifício João Calvino!\n");
+    } else {
+        printf("Não conseguimos encontrar a chave no Edifício João Calvino.\n");
+    }
+
+    return 0;
 }
 
 int encontrar(int lin, int col, char mapa[MAX][MAX], int visitado[MAX][MAX], int n, int m){
-  //retorna 0 se estiver fora da matriz!
-  if(lin < 0 || col < 0 || lin >= n || col >= m) return 0;
+    if(lin < 0 || col < 0 || lin >= n || col >= m) return 0;
+    if(visitado[lin][col]) return 0;
 
-  //se ja visitou, retorna 0
-  if(visitado[lin][col])return 0;
+    if(mapa[lin][col] == '*') return 1;
 
-  if(mapa[lin][col] == '*') {
-    return 1;
-  }
-  //mrca como visitado
-  visitado[lin][col] = 1;
+    visitado[lin][col] = 1;
 
-
-  //quando for H so pode ir pra esquerda ou direita
-  if (mapa[lin][col] == 'H') { 
-        if (encontrar( lin, col - 1, mapa, visitado, n, m)) return 1;
+    if (mapa[lin][col] == 'H') { 
+        if (encontrar(lin, col - 1, mapa, visitado, n, m)) return 1;
         if (encontrar(lin, col + 1, mapa, visitado, n, m)) return 1;
     }
-    //quando for V so pode ir pra cima ou pra baixo
-    //checa a celula visinha, bloqueia a lin de ir pra cima ou baixo quando for h
 
     if (mapa[lin][col] == 'V') {
         if (encontrar(lin - 1, col, mapa, visitado, n, m)) return 1;
         if (encontrar(lin + 1, col, mapa, visitado, n, m)) return 1;
     }
- 
-  return 0;
+
+    return 0;
 }
