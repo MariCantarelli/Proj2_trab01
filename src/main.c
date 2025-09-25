@@ -70,14 +70,21 @@ int encontrar(int s_lin, int s_col, int lin, int col, char **mapa, int **visitad
 
   //quando for H so pode ir pra esquerda ou direita
   if(mapa[lin][col] == 'H'){ 
-    if(encontrar(s_lin, s_col, lin, col - 1, mapa, visitado, n)) return 1;
-    if(encontrar(s_lin, s_col, lin, col + 1, mapa, visitado, n)) return 1;
-  }
+    //checa a celula visinha, bloqueia a col de ir pra esquerda ou direita quando for v
+    if (col - 1 >= 0 && (mapa[lin][col - 1] == 'H' || mapa[lin][col - 1] == '*'))
+            if (encontrar(s_lin, s_col, lin, col - 1, mapa, visitado, n)) return 1;
+        if (col + 1 < n && (mapa[lin][col + 1] == 'H' || mapa[lin][col + 1] == '*'))
+            if (encontrar(s_lin, s_col, lin, col + 1, mapa, visitado, n)) return 1;
+    }
+
 
   //quando for V so pode ir pra cima ou pra baixo
   if(mapa[lin][col] == 'V'){
-    if(encontrar(s_lin, s_col, lin - 1, col, mapa, visitado, n)) return 1;
-    if(encontrar(s_lin, s_col, lin + 1, col, mapa, visitado, n)) return 1;
-  }
+    //checa a celula visinha, bloqueia a lin de ir pra cima ou baixo quando for h
+    if (lin - 1 >= 0 && (mapa[lin - 1][col] == 'V' || mapa[lin - 1][col] == '*'))
+            if (encontrar(s_lin, s_col, lin - 1, col, mapa, visitado, n)) return 1;
+        if (lin + 1 < n && (mapa[lin + 1][col] == 'V' || mapa[lin + 1][col] == '*'))
+            if (encontrar(s_lin, s_col, lin + 1, col, mapa, visitado, n)) return 1;
+    }
   return 0;
 }
