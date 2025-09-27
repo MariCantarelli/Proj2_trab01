@@ -7,3 +7,50 @@ Alunos:
   - Vinicius Barbosa Pereira Allegretti - 10437502
 
 Turma: 04G
+
+claro! aqui vai a versão bem enxuta pro README:
+
+# Como executar
+
+**Compilar (Windows, com GCC):**
+
+```bat
+gcc -o main.exe *.c *.h
+```
+
+**Formato do arquivo de entrada (stdin):**
+
+1. `n` = número de linhas do mapa
+2. `n` linhas só com `H`, `V` ou `*` (sem espaços; todas do mesmo tamanho)
+3. `startLin startCol` (coordenadas iniciais, base 0)
+
+**Executar com arquivo:**
+
+```bat
+main.exe < entrada.txt
+```
+
+**Exemplo de `entrada.txt`:**
+
+```
+5
+HVVVHV
+HHVVVV
+HVHVVH
+*HVVHV
+HHHVHH
+0 0
+```
+
+**Saída esperada (se achar `*` seguindo as regras):**
+
+```
+Chave encontrada no Edifício João Calvino!
+```
+
+**Observações:**
+
+* Limite: até 1000×1000 (`#define MAX 1000`).
+* `H` move horizontal (esq/dir); `V` move vertical (cima/baixo); `*` é o objetivo.
+* Sem espaços nas linhas; todas com mesmo número de colunas.
+
