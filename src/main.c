@@ -1,3 +1,10 @@
+/* Alunos:
+    - Luiza Marinho de Mesquita - 10438045
+    - Marina Cantarelli Barroca - 10740412
+    - Vinicius Barbosa Pereira Allegretti - 10437502
+    Turma: 04G
+*/
+
 // Inclusão de Bibliotecas Padrão
 #include <stdio.h>  // Para funções de entrada e saída, como scanf() e printf().
 #include <string.h> // Para funções de manipulação de strings, como strlen() e strcpy().
