@@ -8,8 +8,6 @@ Alunos:
 
 Turma: 04G
 
-claro! aqui vai a versão bem enxuta pro README:
-
 # Como executar
 
 **Compilar (Windows, com GCC):**
