@@ -8,6 +8,8 @@ Alunos:
 
 Turma: 04G
 
+Link do nosso vídeo no Youtube: https://youtu.be/j9VmcqBpAuQ?si=Qt_749fGJopao7AM
+
 # Como executar
 
 **Compilar (Windows, com GCC):**
